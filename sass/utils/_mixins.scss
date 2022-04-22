@@ -1,0 +1,21 @@
+//==============================================================================
+/*                                                                            *
+ * 2 main mixins:                                                             *
+ * - one-line-menu to format nav menu for desktop                             *
+ * - burger-menu($ratio) to format menu for mobile, small-table, tablet and   *
+ * laptop                                                                     *
+ * The other mixin are used to encapsulate media query for the responsiveness *
+ *                                                                            */
+//==============================================================================
+
+
+
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * @mixin one-line-menu() : used for desktop nav menu
+ * The burger-menu icon is hidden
+ * The menu items are displayed as inline-block to have the menu on one
+ * line. The other formattings are the direct translation of the mockup.
+ */
+//──────────────────────────────────────────────────────────────────────────────
+

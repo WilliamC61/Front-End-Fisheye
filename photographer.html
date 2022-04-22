@@ -1,36 +1,130 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <!-- to use device logical viewport-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- for MS edge compatibility -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- style sheet path -->
+        <link href="public/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- use of google fonts via CDN -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <!-- use of font awesome via bootstrap CDN -->
+        <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+        <title>Fisheye</title>
+        <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
+        <title>Fisheye - photographe </title>
+    </head>
+    <body>
+        <header class="header">
+            <a class="header_link" href="index.html">
+                <img src="assets/images/logo.png" class="header_logo" alt="Fisheye Home page"/>
+            </a>
+            </header>
+        <main id="main">
+            <div id="photographer">
+                <!-- <div class="photographer-header">
+                    <div class = photographer-header_presentation>
+                        <h1 class="photographer-header_name">Mimi Keel</h1>
+                        <h2 class="photographer-header_location">London, UK</h2>
+                        <h3 class= "photographer-header_tagline">Voir le beau dans le quotidien</h3>
+                    </div>
+                    <button class="photographer-header_contact-button" onclick="displayModal()">Contactez-moi</button>
+                    <img class="photographer-header_portrait" src="./assets/photographersIDPict/MimiKeel.jpg">
+                </div>
+                
+                <div class="media">
+                    <article class="medium_card">
+                        <a class="media_card_link" id="1234" href="" onclick="displayLightBox(event)" >
+                            <img class="media_card_img" src ="./assets/media/Mimi/Animals_Rainbow.jpg">
+                        </a>
+                        <div class="media_card_legend">
+                            <h2 class="media_card_title">title</h2>
+                            <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
+                        </div>
+                    </article>
+                    <article class="media_card">
+                        <a class="media_card_link" id="1234">
+                            <img class="media_card_img" src ="./assets/media/Mimi/Animals_Rainbow.jpg">
+                        </a>
+                        <div class="media_card_legend">
+                            <h2 class="media_card_title">title</h2>
+                            <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
+                        </div>
+                    </article>
+                    <article class="media_card">
+                        <a class="media_card_link" id="1234">
+                            <img class="media_card_img" src ="./assets/media/Mimi/Animals_Rainbow.jpg">
+                        </a>
+                        <div class="media_card_legend">
+                            <h2 class="media_card_title">title</h2>
+                            <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
+                        </div>
+                    </article>
+                    <article class="media_card">
+                        <a class="media_card_link" id="1234">
+                            <video class="media_card_video" src ="./assets/media/Mimi/Animals_Wild_Horses_in_the_mountains.mp4">
+                        </a>
+                        <div class="media_card_legend">
+                            <h2 class="media_card_title">title</h2>
+                            <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
+                        </div>
+                    </article>
+                    <article class="media_card">
+                        <a class="media_card_link" id="1234">
+                            <img class="media_card_img" src ="./assets/media/Mimi/Animals_Rainbow.jpg">
+                        </a>
+                        <div class="media_card_legend">
+                            <h2 class="media_card_title">title</h2>
+                            <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
+                        </div>
+                    </article>
+                    <article class="media_card">
+                        <a class="media_card_link" id="1234">
+                            <img class="media_card_img" src ="./assets/media/Mimi/Animals_Rainbow.jpg">
+                        </a>
+                        <div class="media_card_legend">
+                            <h2 class="media_card_title">title</h2>
+                            <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
+                        </div>
+                    </article>
+                </div> -->
+            </div>
+            <div class="sort-criteria">
+                <label for="sort-criteria" class="sort-criteria_label">Trier par</label>
+                <select name="sort-criteria" id="sort-criteria" class="sort-criteria_select">
+                    <option value="likes" class="sort-criteria_option">Popularité</option>
+                    <option value="date" class="sort-criteria_option">Date</option>
+                    <option value="title" class="sort-criteria_option">Titre</option>
+                </select>
+            </div>
+            <div id="media">
+            </div>
+            <div id="likes-and-price" class="likes-and-price">
+                <span id="likes-and-price_likes" class="likes-and-price_likes">12<i class="likes-and-price_likes-icon fas fa-heart"></i></span><p id="likes-and-price_price" class="likes-and-price_price">300€/jour</p>
+            </div>
+        </main>
+
+
+        <!-- <div id="contact_modal">
+                <div class="modal">
+                    <header>
+            <h2>Contactez-moi</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" />
+            </header>
+                    <form>
+                        <div>
+                            <label>Prénom</label>
+                            <input />
+                        </div>
+            <button class="contact_button">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+            -->
+        <script type="module" src="/scripts/pages/photographer.js"></script> 
+    </body>
 </html>

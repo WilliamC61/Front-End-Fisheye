@@ -1,45 +1,27 @@
-    async function getPhotographers() {
-        // Penser à remplacer par les données récupérées dans le json
-        const photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
-        // et bien retourner le tableau photographers seulement une fois
-        return ({
-            photographers: [...photographers, ...photographers, ...photographers]})
+   
+
+import {FisheyeApi} from "../api/Api.js";
+import { PhotographerArticle} from "../templates/PhotographerArticle.js";
+class FisheyeIndex {
+    constructor() {
+        this.photographersSection = document.querySelector(".photographers-section");
+        this.api = new FisheyeApi("/data/photographers.json");
     }
 
-    async function displayData(photographers) {
-        const photographersSection = document.querySelector(".photographer_section");
-
-        photographers.forEach((photographer) => {
-            const photographerModel = photographerFactory(photographer);
-            const userCardDOM = photographerModel.getUserCardDOM();
-            photographersSection.appendChild(userCardDOM);
+    async main() {
+        const fisheyeData = await this.api.getData();
+        console.log(fisheyeData);
+        const photographersData = fisheyeData.photographers;
+        photographersData.forEach(photographer=>{
+            const Template = new PhotographerArticle(photographer);
+            this.photographersSection.appendChild(Template.createPhotographerArticle());
         });
-    };
+    }
+}
 
-    async function init() {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
-    };
-    
-    init();
-    
+function start() {
+    const app = new FisheyeIndex();
+    app.main();
+}
+
+window.addEventListener("DOMContentLoaded", start);

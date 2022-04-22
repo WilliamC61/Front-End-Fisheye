@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye</title>
-  </head>
-  <body>
-    <header>
-        <img src="assets/images/logo.png" class="logo" />
-        <h1>Nos photographes</h1>
-    </header>
-    <main id="main">
-        <div class="photographer_section"></div>
-    </main>
-    <script src="scripts/factories/Photographer.js"></script>
-    <script src="scripts/pages/index.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
-  </body>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <!-- to use device logical viewport-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- for MS edge compatibility -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- style sheet path -->
+        <link href="public/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- use of google fonts via CDN -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <title>Fisheye</title>
+        <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
+    </head>
+    <body>
+        <header class="header">
+            <img src="assets/images/logo.png" class="header_logo" alt="Fisheye Home page"/>
+            <h1 class="header_title">Nos photographes</h1>
+        </header>
+        <main id="main">
+            <div class="photographers-section">
+            <!-- static article used to test HTML, to be deleted 
+            <article class="photographers-section_article">
+                <a class="photographer-link" >
+                    <img class="photographers-section_article_portrait" src="/assets/Sample Photos/Photographers ID Photos/MimiKeel.jpg"
+                    alt="Photo de Mimi Keel">
+                    <h2 class="photographers-section_article_name">Mimi Keel</h2>
+                </a>
+                <h3 class="photographers-section_article_location"> Paris, France</h3>
+                <h4 class="photographers-section_article_tagline"> voir le beau</h4>
+                <h5 class="photographers-section_article_price"> 400€</h5>
+            </article> -->
+            </div>
+        </main>
+        <script type="module" src="scripts/pages/index.js"></script>
+    </body>
 </html>

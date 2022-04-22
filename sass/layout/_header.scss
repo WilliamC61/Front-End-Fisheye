@@ -1,0 +1,30 @@
+//==============================================================================
+/*                                                                            *
+ * header                                                                     *
+ *                                                                            *
+ * It's arow flexbox including logo and nav                                   *
+ * The height is customized depending on the screen size and logo is sized    *
+ * accordingly.                                                               *
+ * For desktop, the logo and the one-line menu is aligned to the bottom of    *
+ * header, for the other screen sizes burger menu is displayed in an absolute *
+ * position.                                                                  *
+ * The nav menus is formatted using the 2 mixin on-line-menu and burger-menu. *
+ * Burger-menu has a retio parameter to size the menu depending on the screen *
+ * size.                                                                      * 
+ *                                                                            */
+//==============================================================================
+ 
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 9rem;
+    &_logo {
+        height: 5rem;
+        margin-left: 10rem;
+    }
+    &_title { 
+        color: $color-primary;
+        margin-right: 10rem;}
+}

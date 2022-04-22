@@ -1,0 +1,553 @@
+/*
+@import "./utils/functions";*/
+/*                                                                            *
+ * 2 main mixins:                                                             *
+ * - one-line-menu to format nav menu for desktop                             *
+ * - burger-menu($ratio) to format menu for mobile, small-table, tablet and   *
+ * laptop                                                                     *
+ * The other mixin are used to encapsulate media query for the responsiveness *
+ *                                                                            */
+/*
+ * @mixin one-line-menu() : used for desktop nav menu
+ * The burger-menu icon is hidden
+ * The menu items are displayed as inline-block to have the menu on one
+ * line. The other formattings are the direct translation of the mockup.
+ */
+/*
+@import "./utils/extensions";
+*/
+/*                                                                            *
+ * some global settings like reset, rem, and body margins                     *
+ *                                                                            */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #FFFFFF;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  color: #757575;
+  font-size: 1.8rem;
+  font-weight: normal;
+  line-height: 1;
+}
+
+/*
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 2.5rem;
+    font-style: normal;
+    line-height: 1.1;
+}
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 2.5rem;
+    font-style: normal;
+    line-height: 1.1;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    font-style: normal;
+    line-height: 1.1;
+    
+}
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1.7rem;
+    line-height: 3rem;
+}
+textarea {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 2rem;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 2.75rem;
+}
+.location {
+    font-size: 1.8rem;
+    font-weight: normal;
+}
+
+*/
+/*                                                                            *
+ * header                                                                     *
+ *                                                                            *
+ * It's arow flexbox including logo and nav                                   *
+ * The height is customized depending on the screen size and logo is sized    *
+ * accordingly.                                                               *
+ * For desktop, the logo and the one-line menu is aligned to the bottom of    *
+ * header, for the other screen sizes burger menu is displayed in an absolute *
+ * position.                                                                  *
+ * The nav menus is formatted using the 2 mixin on-line-menu and burger-menu. *
+ * Burger-menu has a retio parameter to size the menu depending on the screen *
+ * size.                                                                      * 
+ *                                                                            */
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 9rem;
+}
+
+.header_logo {
+  height: 5rem;
+  margin-left: 10rem;
+}
+
+.header_title {
+  color: #901C1C;
+  margin-right: 10rem;
+}
+
+/*                                                                            *
+ * index.scss : main sass file for the welcome page                           *
+ * 2 main parts:                                                              *
+ * - pitch for the welcome page itself                                        *
+ * - modal for the modal window. It includes 3 parts:                         *
+ *   o a header                                                               *
+ *   o the subcription form                                                   *
+ *   o the confirmation form                                                  *
+ * The diaply of the different part and the form validation are manage by the *
+ *                                                                            */
+/*
+ * <div> pitch
+ * For desktop, laptop and tablet title subtitle and subscription button are 
+ * displayed over the picture with a black box left size to have box + 
+ * background image covering the page width.
+ * This is obtained by using a black background for the div pitch (z-index:0)
+ * and setting the image with an aboslute position to the upper rigt corner
+ * with same height as the pitch div.
+ * The title, subtitle and button are displayed sequentially with z-index:1
+ * to be over the image even if coming before in the display flow.
+ * To have a better look some sizing adapation are done for laptop and tablet
+ * vs the pure desktop mockup.   
+ * for mobile and small-tablet, a centered display is done: title, subtitle, 
+ * background image and subscription button are displayed sequentially asin the
+ * html, and the sccss is common.
+ */
+.photographers-section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  gap: 7rem;
+  margin-top: 10rem;
+}
+
+.photographers-section_article {
+  justify-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.photographers-section_article_portrait {
+  height: 20rem;
+  width: 20rem;
+  border-radius: 50%;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.photographers-section_article_name {
+  font-weight: 400;
+  font-size: 3.6rem;
+  line-height: 4.687rem;
+  color: #D3573C;
+  text-decoration: none;
+}
+
+.photographers-section_article_location {
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1.693rem;
+  color: #901C1C;
+}
+
+.photographers-section_article_tagline {
+  font-weight: 400;
+  font-size: 1.0rem;
+  line-height: 1.302rem;
+  color: #000000;
+}
+
+.photographers-section_article_price {
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.172rem;
+  color: #757575;
+}
+
+.photographer-link {
+  text-decoration: none;
+  text-align: center;
+}
+
+.photographer-header {
+  background-color: #FAFAFA;
+  height: 30rem;
+  margin: 0 10rem;
+  padding: 0 5rem 0 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.photographer-header_presentation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.photographer-header_name {
+  font-weight: 400;
+  font-size: 6.4rem;
+  line-height: 8.333rem;
+  color: #D3573C;
+}
+
+.photographer-header_location {
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.125rem;
+  color: #901C1C;
+}
+
+.photographer-header_tagline {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.344rem;
+  color: #525252;
+}
+
+.photographer-header_contact-button {
+  border: 0;
+  border-radius: 0.5rem;
+  width: 17rem;
+  height: 6.9rem;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: #FFFFFF;
+  background-color: #901C1C;
+}
+
+.photographer-header_contact-button:hover {
+  cursor: pointer;
+}
+
+.photographer-header_portrait {
+  height: 20rem;
+  width: 20rem;
+  border-radius: 50%;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#media {
+  margin: 0 6rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-top: 10rem;
+}
+
+.medium-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.medium-card_img {
+  width: 35rem;
+  height: 30rem;
+  border: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.medium-card_video {
+  width: 35rem;
+  height: 30rem;
+  border: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.medium-card_legend {
+  width: 35rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.medium-card_title {
+  width: 28rem;
+  display: block;
+  font-size: 2.4rem;
+  line-height: 3.125rem;
+  font-weight: 400;
+  color: #901C1C;
+}
+
+.medium-card_likes {
+  display: block;
+  font-size: 2.4rem;
+  line-height: 3.125rem;
+  font-weight: 400;
+  color: #901C1C;
+}
+
+.medium-card_likes-icon {
+  padding-left: 0.6rem;
+}
+
+.sort-criteria {
+  margin: 2rem 10rem;
+}
+
+.sort-criteria_label {
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.344rem;
+}
+
+.sort-criteria_select {
+  outline: 0;
+  border: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: #901C1C;
+  box-shadow: none;
+  border-radius: 0.5rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.344rem;
+  color: #FFFFFF;
+}
+
+.sort-criteria_select:hover {
+  cursor: pointer;
+}
+
+.sort-criteria_option {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  border: none;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.344rem;
+  background-color: #901C1C;
+  color: #FFFFFF;
+}
+
+.likes-and-price {
+  width: 37.6rem;
+  height: 6.7rem;
+  padding-left: 3.1rem;
+  padding-right: 3.1rem;
+  position: fixed;
+  bottom: 0;
+  right: 3.6rem;
+  background: #DB8876;
+  color: #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 3.125rem;
+}
+
+.likes-and-price_likes {
+  display: inline-block;
+}
+
+.likes-and-price_likes-icon {
+  padding-left: 0.6rem;
+}
+
+.likes-and-price_price {
+  display: inline-block;
+}
+
+/*
+#contact_modal {
+    display: none;
+}
+
+.
+
+.contact_button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.modal header {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img {
+    cursor: pointer;
+}
+
+.modal header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 36px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+
+form input {
+    width: 100%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+}
+
+*/
+/*# sourceMappingURL=style.css.map */

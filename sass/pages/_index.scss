@@ -1,0 +1,87 @@
+
+//==============================================================================
+/*                                                                            *
+ * index.scss : main sass file for the welcome page                           *
+ * 2 main parts:                                                              *
+ * - pitch for the welcome page itself                                        *
+ * - modal for the modal window. It includes 3 parts:                         *
+ *   o a header                                                               *
+ *   o the subcription form                                                   *
+ *   o the confirmation form                                                  *
+ * The diaply of the different part and the form validation are manage by the *
+ *                                                                            */
+//==============================================================================
+
+
+
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * <div> pitch
+ * For desktop, laptop and tablet title subtitle and subscription button are 
+ * displayed over the picture with a black box left size to have box + 
+ * background image covering the page width.
+ * This is obtained by using a black background for the div pitch (z-index:0)
+ * and setting the image with an aboslute position to the upper rigt corner
+ * with same height as the pitch div.
+ * The title, subtitle and button are displayed sequentially with z-index:1
+ * to be over the image even if coming before in the display flow.
+ * To have a better look some sizing adapation are done for laptop and tablet
+ * vs the pure desktop mockup.   
+ * for mobile and small-tablet, a centered display is done: title, subtitle, 
+ * background image and subscription button are displayed sequentially asin the
+ * html, and the sccss is common.
+ */
+//──────────────────────────────────────────────────────────────────────────────
+
+.photographers-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 7rem;
+    margin-top: 10rem;
+    &_article {
+        justify-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &_portrait {
+            height: 20rem;
+            width: 20rem;
+            border-radius: 50%;
+            overflow: hidden;
+            object-fit: cover;
+        }
+        &_name {
+            font-weight: 400;
+            font-size: 3.6rem;
+            line-height: 4.687rem;
+            color: $color-secondary;
+            text-decoration: none;
+        }
+        &_location {
+            font-weight: 400;
+            font-size: 1.3rem;
+            line-height: 1.693rem;
+            color: $color-primary;
+
+        }
+        &_tagline {
+            font-weight: 400;
+            font-size: 1.0rem;
+            line-height: 1.302rem;
+            color: $color-black;
+        }
+        &_price {
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 1.172rem;
+            color: $color-grey;
+
+        }
+    }
+}
+
+.photographer-link  {
+    text-decoration: none;
+    text-align: center;
+}

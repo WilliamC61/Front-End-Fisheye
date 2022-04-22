@@ -1,0 +1,26 @@
+//==============================================================================
+/*                                                                            *
+ * some global settings like reset, rem, and body margins                     *
+ *                                                                            */
+//==============================================================================
+
+//──── Reset ──────────────────────────────────────────────────────────────────
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+//──── to have 1rem = 10px ────────────────────────────────────────────────────
+html {
+    // 10px div by def of 16px
+    font-size: 62.5%;
+}
+
+//──── Page margin and background color definition ─────────────────────────── 
+body {
+    box-sizing: border-box;
+    background: $color-white;
+}
