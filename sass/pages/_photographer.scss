@@ -60,6 +60,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 3rem;
     margin-top: 10rem;
+    align-items: start;
 }
 .medium-card {
     display: flex;
@@ -106,6 +107,11 @@
     }
     &_likes-icon {
         padding-left: 0.6rem;
+        display: block;
+        font-size: 2.4rem;
+        line-height: 3.125rem;
+        font-weight: 400;
+        color: $color-primary;
     }
 }
 .sort-criteria {

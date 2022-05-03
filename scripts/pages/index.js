@@ -1,7 +1,7 @@
    
 
 import {FisheyeApi} from "../api/Api.js";
-import { PhotographerArticle} from "../templates/PhotographerArticle.js";
+import { Photographer} from "../models/Photographer.js";
 class FisheyeIndex {
     constructor() {
         this.photographersSection = document.querySelector(".photographers-section");
@@ -13,7 +13,7 @@ class FisheyeIndex {
         console.log(fisheyeData);
         const photographersData = fisheyeData.photographers;
         photographersData.forEach(photographer=>{
-            const Template = new PhotographerArticle(photographer);
+            const Template = new Photographer(photographer);
             this.photographersSection.appendChild(Template.createPhotographerArticle());
         });
     }

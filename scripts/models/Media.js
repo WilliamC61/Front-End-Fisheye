@@ -1,64 +1,68 @@
-class Medium {
+export class Medium {
     constructor(data) {
-        this._id = data.id;
-        this._photographerId = data.photographerId;
-        this._title = data.title;
-        this._likes = data.likes;
-        this._date = data.date;
-        this._price = data.price;
+        this.id = data.id;
+        this.photographerId = data.photographerId;
+        this.title = data.title;
+        this.likes = data.likes;
+        this.date = data.date;
+        this.price = data.price;
     }
 
-    get id() {
-        return this._id;
-    }
-    get photographerId() {
-        return this._photographerId;
-    }
-
-    get title() {
-        return this._title;
+    get(property) {
+        if (property in this) {
+            return this[property];
+        } else {
+            throw new Error(`La propriété ${property} n'existe pas.`);
+        }
     }
 
-    get likes() {
-        return this._likes;
-    }
-
-    get date() {
-        return this._date;
-    }
-
-    get price() {
-        return this._price;
+    createMediumArticle() {
+        const article = document.createElement("article");
+        article.classList.add("medium-card");
+        const MediumArticle = `
+            <a class="medium-card_link" id= this.medium.id
+                href="#"
+                aria-label="${this.title}">
+                ${this.thumbnailElement}
+                    src="../../assets/media/${this.photographerId}/${this.fileName}"
+                    alt="${this.title}">
+            </a>
+            <div class="medium-card_legend">
+                <h2 class="medium-card_title">${this.title}</h2>
+                <span class="medium-card_likes">${this.likes}<span><i class="medium-card_likes-icon fas fa-heart"></i>
+            </div>
+        `;
+        article.innerHTML= MediumArticle; 
+        return article;
     }
 }
 
 export class Image extends Medium {
     constructor(data) {
         super(data);
-        this._thumbnailElement = "<img class=\"medium-card_img\" ";
-        this._thumbnailFile = data.image;
+        this.thumbnailElement = "<img class=\"medium-card_img\" ";
+        this.fileName = data.image;
     }
-
-    get thumbnailElement() {
-        return this._thumbnailElement;
-    }
-    
-    get thumbnailFile() {
-        return this._thumbnailFile;
+    get(property) {
+        if (property in this) {
+            return this[property];
+        } else {
+            throw new Error(`La propriété ${property} n'existe pas.`);
+        }
     }
 }
 
 export class Video extends Medium {
     constructor(data) {
         super(data);
-        this._thumbnailElement = "<video class=\"medium-card_video\" ";
-        this._thumbnailFile = data.video;
+        this.thumbnailElement = "<video class=\"medium-card_video\" ";
+        this.fileName = data.video;
     }
-    get thumbnailElement() {
-        return this._thumbnailElement;
-    }
-    
-    get thumbnailFile() {
-        return this._thumbnailFile;
+    get(property) {
+        if (property in this) {
+            return this[property];
+        } else {
+            throw new Error(`La propriété ${property} n'existe pas.`);
+        }
     }
 }

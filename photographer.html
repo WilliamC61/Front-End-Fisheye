@@ -34,9 +34,20 @@
                     </div>
                     <button class="photographer-header_contact-button" onclick="displayModal()">Contactez-moi</button>
                     <img class="photographer-header_portrait" src="./assets/photographersIDPict/MimiKeel.jpg">
-                </div>
+                </div> 
+            -->
                 
-                <div class="media">
+            </div>
+            <div class="sort-criteria">
+                <label for="sort-criteria" class="sort-criteria_label">Trier par</label>
+                <select name="sort-criteria" id="sort-criteria" class="sort-criteria_select">
+                    <option value="likes" class="sort-criteria_option">Popularité</option>
+                    <option value="date" class="sort-criteria_option">Date</option>
+                    <option value="title" class="sort-criteria_option">Titre</option>
+                </select>
+            </div>
+            <div id="media">
+                <!-- 
                     <article class="medium_card">
                         <a class="media_card_link" id="1234" href="" onclick="displayLightBox(event)" >
                             <img class="media_card_img" src ="./assets/media/Mimi/Animals_Rainbow.jpg">
@@ -91,20 +102,15 @@
                             <span class="media_card_nb-likes">12<i class="media_card_likes-icon fas fa-heart"></i></span>
                         </div>
                     </article>
-                </div> -->
-            </div>
-            <div class="sort-criteria">
-                <label for="sort-criteria" class="sort-criteria_label">Trier par</label>
-                <select name="sort-criteria" id="sort-criteria" class="sort-criteria_select">
-                    <option value="likes" class="sort-criteria_option">Popularité</option>
-                    <option value="date" class="sort-criteria_option">Date</option>
-                    <option value="title" class="sort-criteria_option">Titre</option>
-                </select>
-            </div>
-            <div id="media">
+                 -->
             </div>
             <div id="likes-and-price" class="likes-and-price">
-                <span id="likes-and-price_likes" class="likes-and-price_likes">12<i class="likes-and-price_likes-icon fas fa-heart"></i></span><p id="likes-and-price_price" class="likes-and-price_price">300€/jour</p>
+                <div id = "likes">
+                    <!-- <span  class="likes">12<i class="likes-icon fas fa-heart"></i> -->
+                </div>
+                <div id ="price">
+                    <!-- <p class="likes-and-price_price">300€/jour</p> -->
+                </div>
             </div>
         </main>
 

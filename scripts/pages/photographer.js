@@ -1,108 +1,138 @@
 import {FisheyeApi} from "../api/Api.js";
-import {PhotographerHeader} from "../templates/PhotographerHeader.js";
-import { MediaFactory } from "../factories/MediaFactory.js";
-import {MediumArticle} from "../templates/MediumArticle.js";
+import {Photographer} from "../models/Photographer.js";
+import {MediaFactory } from "../factories/MediaFactory.js";
+import {Medium} from "../models/Media.js";
 
+
+/**
+ * @class FisheyePhotographer : manages the page dedicated to a photogrpaher. 
+ */
 class FisheyePhotographer {
+    /**
+     * @constructor : initialiazes the class for the photogrpaher with ID 
+     *      passed in parameter.
+     * @param {Interger} photographerId : Id of the photographer
+     */
     constructor(photographerId) {
+        // photogrpaher Id is saved as reused in some methods
+        this.photographerId = photographerId;
+        // intantiation of the API to retrive the data
         this.api = new FisheyeApi("/data/photographers.json");
+        // search and save the different dynamyc elements
         this.photographerDiv = document.querySelector("#photographer");
         this.mediaDiv = document.querySelector("#media");
-        this.likesAndPriceDiv = document.querySelector("#likes-and-price");
-        this.photographerId = photographerId;
+        this.likesDiv = document.querySelector("#likes");
+        this.priceDiv = document.querySelector("#price");
+        // the following properties are filled by other methods.
         this.photographerMediaArray = [];
         this.photographerLikes = 0;
         this.photographerPrice = 0;
     }
 
-    // method to sort the media array depending on the criteria
+    /**
+     * @method : sorts the media array depending on the criteria following the
+     *      criteria given in parameter.
+     * @param {String= "likes, date, title"} : sortCriteria to use 
+     */
     sortPhotographerMedia(sortCriteria) {
-        if (sortCriteria === "likes") {
+        switch (sortCriteria) {
+        case "likes":
             // sort by decreasing likes (most popular first)
             this.photographerMediaArray.sort((a, b) => b.likes-a.likes);
-        } else if (sortCriteria === "date") {
+            break;
+        case "date":
             // sort by decreasing date (most recent first)
-            this.photographerMediaArray.sort((a, b) =>{
-                if (a.date>b.date) {
-                    return-1;
-                }
-                else if (a.date<b.date) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            });
-        } else if (sortCriteria === "title") {
+            this.photographerMediaArray.sort((a, b) => b.date.localeCompare(a.date));
+            break;
+        case "title":
             // sort by increasing title 
-            this.photographerMediaArray.sort((a, b) => {
-                if (a.title<b.title) {
-                    return-1;
-                }
-                else if (a.title>b.title) {
-                    return 1;
-                } else {
-                    return 0;
-                }    
-            });
-        } else {
+            this.photographerMediaArray.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        default:
+            // unexpectd value => error
             throw `Unknow sort criteria:${sortCriteria}`;
         }
     }
    
+    /**
+     * @method displayPhotographerPrice() : displays photogrper's price per day
+     *      in the bottom panel. Called once when the photogrpher header is
+     *      displayed.
+     */
 
-    // displays photographer media and compute global likes 
+    displayPhotographerPrice() {
+        this.priceDiv.innerHTML= `
+            <p class="price">${this.photographerPrice}€/jour</p>`;
+    }
+
+    /**
+     * @method displayPhotographerLikes() : displays photogrper's cumulated
+     *      likes in the bottom panel. Called each time the media are displayed
+     *      or refreshed.
+     */
+
+    displayPhotographerLikes() {
+        this.likesDiv.innerHTML= `
+        <span class="likes">${this.photographerLikes}
+            <i class="likes-icon fas fa-heart"></i>
+        </span>`;
+    }
+
+    /**
+     * @method displayPhotographerMedia() : displays the grid of photogrper's
+     *      media and compute the cumulated likes to display it in the bottom
+     *      panel. Called each time the media are displayed or refreshed.
+     * @assumption : the media array has been built and sorted before call.
+     */
+   
     displayPhotographerMedia() {
         // empty the Media div and reset the like counter
         this.mediaDiv.innerHTML = "";
         this.photographerLikes = 0;
+        // loop to append each medium article, and add medium likes to counter
         this.photographerMediaArray.forEach (medium => {
-            const Template = new MediumArticle(medium);
-            this.mediaDiv.appendChild(Template.createMediumArticle(this.photographerId));
+            const Template = medium.createMediumArticle();
+            this.mediaDiv.appendChild(Template);
             this.photographerLikes += medium.likes; 
         });
-        this.likesAndPriceDiv.innerHTML= `
-            <span class="likes-and-price_likes">${this.photographerLikes}
-                <i class="likes-and-price_likes-icon fas fa-heart"></i>
-            </span>
-            <p class="likes-and-price_price">${this.photographerPrice}€/jour</p>`;
+        // display likes counter
+        this.displayPhotographerLikes();
     }
 
-
-   
-
-
+    /**
+     * @method : displayPhotographerHeaders : display the photographer header 
+     *      whose ID match the ID given in parameter 
+     * @param {Array of photographer data} photographersData : photogrpahers
+     *      data part of the API. 
+     */
     displayPhotographerHeader(photographersData) {
-        // serch the photographer data by ID and create photographer header template when found
+        // serch the photographer data set by ID and create photographer's
+        // header template when found
         let Template = null;
         photographersData.forEach(photographer=>{
             if (photographer.id === this.photographerId) {
-                Template = new PhotographerHeader(photographer);
+                Template = new Photographer(photographer);
             }
         });    
         // if not found throw an error
-        if (Template===null) {
+        if (Template === null) {
             throw `photographer with ID =${this.photogrpaherID} not found`;
         } 
+        // display the photogrpaher template
         this.photographerDiv.appendChild(Template.createPhotographerHeader());
         // keep photographer price for below right frame
-        this.photographerPrice= Template._photographer.price;
+        this.photographerPrice = Template.price;
+        this.displayPhotographerPrice();
     }
 
-    buildMediaArray(mediaData){
+    buildPhotographerMediaArray(mediaData){
         mediaData.forEach(medium=>{
             if (medium.photographerId === this.photographerId){
-                if (Object.prototype.hasOwnProperty.call(medium, "image")) {
-                    this.photographerMediaArray.push(new MediaFactory(medium, "image"));
-                }
-                else if (Object.prototype.hasOwnProperty.call(medium,"video")) {
-                    this.photographerMediaArray.push(new MediaFactory(medium, "video"));
-                }
-                else {
-                    throw " medium is neither image nor video";
-                }
+                this.photographerMediaArray.push(new MediaFactory(medium));
             }
         });
     }
+
     // callback for contact-me
     displayContactMeForm() {
         console.log ("contact me");
@@ -120,7 +150,7 @@ class FisheyePhotographer {
         // display photographer header
         this.displayPhotographerHeader(fisheyeData.photographers);
         // build the array of the photographer's media
-        this.buildMediaArray(fisheyeData.media);
+        this.buildPhotographerMediaArray(fisheyeData.media);
         // sort of the array with default criteria : decreasing like (most popular first)
         this.sortPhotographerMedia ("likes");
         // and initial display of the media
