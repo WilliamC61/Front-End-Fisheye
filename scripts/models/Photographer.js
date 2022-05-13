@@ -1,3 +1,11 @@
+/**
+ * @export
+ * @class Photographer : use to manage a photographer :
+ *      - storage of photogrpaher properties
+ *      - generic getter to retrieve properties
+ *      - method to generate photographer's article for welcome page
+ *      - method to generate photographer's header for photogrpher's page
+ */
 export class Photographer {
     constructor(data) {
         this.id = data.id;
@@ -7,9 +15,15 @@ export class Photographer {
         this.tagline = data.tagline;
         this.price = data.price;
         this.portrait = data.portrait;
-        this.likes = 0;
     }
 
+    /**
+     * @method get : generic getter
+     * @param {*} property identifier
+     * @return {*} property value
+     * @throw error
+     * @memberof Photographer
+     */
     get(property) {
         if (property in this) {
             return this[property];
@@ -18,6 +32,11 @@ export class Photographer {
         }
     }
 
+    /**
+     * @method createPhotographerArticle : generate photographer's article for welcome page
+     * @return {article element} the photographer's article element 
+     * @memberof Photographer
+     */
     createPhotographerArticle() {
         const article = document.createElement("article");
         article.classList.add("photographers-section_article");
@@ -26,8 +45,7 @@ export class Photographer {
                 href="photographer.html?id=${this.id.toString()}"
                 aria-label="${this.name}">
                 <img class="photographers-section_article_portrait" 
-                    src="../../assets/photographersIDPict/${this.portrait}"
-                    alt="${this.name}">
+                    src="../../assets/photographersIDPict/${this.portrait}">
                 <h2 class="photographers-section_article_name">${this.name}</h2>
             </a>
             <h3 class="photographers-section_article_location">${this.city}, ${this.country}</h3>
@@ -38,6 +56,11 @@ export class Photographer {
         return article;
     }
 
+    /**
+     * @method createPhotographerHeader : generate photographer's header for photogrpher's page 
+     * @return {div element} the photographer's header div element 
+     * @memberof Photographer
+     */
     createPhotographerHeader() {
         const div = document.createElement("div");
         div.classList.add("photographer-header");

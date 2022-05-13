@@ -19,12 +19,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 9rem;
+    height: 12rem;
     &_logo {
         height: 5rem;
         margin-left: 10rem;
-    }
+   }
     &_title { 
         color: $color-primary;
-        margin-right: 10rem;}
+        margin-right: 10rem;
+        
+    }
 }

@@ -1,6 +1,6 @@
 import {FisheyeApi} from "../api/Api.js";
 import {Photographer} from "../models/Photographer.js";
-import {MediaFactory } from "../factories/MediaFactory.js";
+import {MediaFactory} from "../factories/MediaFactory.js";
 import {Medium} from "../models/Media.js";
 
 
@@ -11,28 +11,31 @@ class FisheyePhotographer {
     /**
      * @constructor : initialiazes the class for the photogrpaher with ID 
      *      passed in parameter.
-     * @param {Interger} photographerId : Id of the photographer
+     * @param {Integer} photographerId : Id of the photographer
      */
     constructor(photographerId) {
-        // photogrpaher Id is saved as reused in some methods
+        // photographer Id is saved as reused in some methods
         this.photographerId = photographerId;
-        // intantiation of the API to retrive the data
+        // instantiation of the API to retrieve the data
         this.api = new FisheyeApi("/data/photographers.json");
         // search and save the different dynamyc elements
-        this.photographerDiv = document.querySelector("#photographer");
-        this.mediaDiv = document.querySelector("#media");
-        this.likesDiv = document.querySelector("#likes");
-        this.priceDiv = document.querySelector("#price");
+        this.photographerDiv = document.getElementById("photographer");
+        this.mediaDiv = document.getElementById("media");
+        this.likesDiv = document.getElementById("likes");
+        this.priceDiv = document.getElementById("price");
+        this.slideShowMediumCard = document.getElementById("medium-lightbox_medium-card");
         // the following properties are filled by other methods.
         this.photographerMediaArray = [];
         this.photographerLikes = 0;
         this.photographerPrice = 0;
+        this.slideIndex = "";
     }
 
     /**
-     * @method : sorts the media array depending on the criteria following the
-     *      criteria given in parameter.
-     * @param {String= "likes, date, title"} : sortCriteria to use 
+     * @method : sorts the media array depending on the criteria given in
+     *      parameter.
+     * @param {String= "likes, date, title"} : sortCriteria to use to sort the
+     *      media array 
      */
     sortPhotographerMedia(sortCriteria) {
         switch (sortCriteria) {
@@ -55,9 +58,10 @@ class FisheyePhotographer {
     }
    
     /**
-     * @method displayPhotographerPrice() : displays photogrper's price per day
+     * @method displayPhotographerPrice() : displays photographer's price per day
      *      in the bottom panel. Called once when the photogrpher header is
      *      displayed.
+     * @memberof FisheyePhotographer
      */
 
     displayPhotographerPrice() {
@@ -69,6 +73,7 @@ class FisheyePhotographer {
      * @method displayPhotographerLikes() : displays photogrper's cumulated
      *      likes in the bottom panel. Called each time the media are displayed
      *      or refreshed.
+     * @memberof FisheyePhotographer
      */
 
     displayPhotographerLikes() {
@@ -78,10 +83,138 @@ class FisheyePhotographer {
         </span>`;
     }
 
+    displaySlide() {
+        const medium = this.photographerMediaArray[this.slideIndex];
+        this.slideShowMediumCard.innerHTML = `
+            ${medium.slideShowElement} src="../../assets/media/${this.photographerId}/${medium.fileName}">
+            <h2 class="medium-lightbox_medium-card_legend">${medium.title}</h2>
+        `;
+    }
+
+    previousSlide = (event) => { 
+        event.stopPropagation;
+        if (--this.slideIndex === -1) {
+            this.slideIndex = this.photographerMediaArray.length - 1;
+        }
+        this.displaySlide();
+    };
+
+    nextSlide = (event) =>  {
+        event.stopPropagation;
+        if (++this.slideIndex === this.photographerMediaArray.length) {
+            this.slideIndex = 0;
+        }
+        this.displaySlide();
+    };
+
+    closeSlideShow = (event) => {
+        event.stopPropagation;
+        // remove the keydown call back
+        document.removeEventListener("keydown", this.mediumLightboxKeydown);
+        // hide the lightbox
+        const mediumLightbox = document.querySelector(".medium-lightbox");
+        mediumLightbox.style.display = "";
+        // and enable scrolling
+        const bodyElement = document.querySelector("body");
+        bodyElement.classList.remove("body-scroll-disable");
+        
+    };
+
+    mediumLightboxKeydown = (event) => {
+        switch(event.key) {
+        case "ArrowLeft":
+        case "ArrowUp" :
+            this.previousSlide(event);
+            break;
+        case "ArrowDown":
+        case "ArrowRight":
+            this.nextSlide(event);
+            break;
+        case "Escape":
+            this.closeSlideShow(event);
+            break;
+        }
+        console.log(event.code);
+    };
+    
+    /**
+     * @method DisplaySlideShow : initialization and display of the slide show
+     *      of the photographer's media. 
+     *      The Id of clicked medium is retrieved using dataset.id of the
+     *      medium target of the event. mei displaying the media which Id is obtain  given in
+     *      parameter.
+     *      The index of this medium is then searched in the media array to
+     *      initialize the slide show index.
+     *      Proper call back are set up for button click and arrow press, the
+     *      scrolling is disabled. 
+     *      The slide show is then event driven with the methods nextSlide,
+     *      previousSlide and closeSlideShow.
+     *      The media are displayed in a loop : with next, when last one is reached, next
+     *      one is first. Same management for previous.
+     *
+     * @param {event} click event on a medium
+     * @throw error message if the medium id is not found in the media arry
+     * @memberof FisheyePhotographer
+     */
+    displaySlideShow= (event) => {
+        // retrieve the initial medium If to initiate the slide show with the
+        // clicked medium
+        const initialMediumId = ~~event.target.dataset.id;
+        // search the index of the initialMediumId in the media array
+        let slideIndex = 0;
+        while((slideIndex !== this.photographerMediaArray.length) &&
+                (this.photographerMediaArray[slideIndex].id !== initialMediumId)) {
+            slideIndex++;
+        }
+        // if not found throw an error
+        if (slideIndex === this.photographerMediaArray.length) {
+            throw (`medium id="${initialMediumId}" not found`);
+        }
+        // found => store it to use it in the previous and next callbacks
+        this.slideIndex = slideIndex;
+        // set the call back for buttons click management
+        const leftArrow = document.getElementById("medium-lightbox_left_arrow");
+        leftArrow.addEventListener("click", this.previousSlide);
+        const rightArrow = document.getElementById("medium-lightbox_right_arrow");
+        rightArrow.addEventListener("click", this.nextSlide);
+        const closeButton = document.getElementById("medium-lightbox_close_button");
+        closeButton.addEventListener("click", this.closeSlideShow);
+        // set call back for key press
+        //mediumLightbox.addEventListener("keydown", this.mediumLightboxKeydown());
+        // display the medium (video or image)
+        this.displaySlide();
+        // disable scrolling
+        const bodyElement = document.querySelector("body");
+        bodyElement.classList.add("body-scroll-disable");
+        // display the lightbox
+        const mediumLightbox = document.getElementById("medium-lightbox");
+        mediumLightbox.style.display = "flex";
+        // set call back for key press
+        document.addEventListener("keydown", this.mediumLightboxKeydown);
+    };
+
+    iLikeIt = (event) => {
+        event.stopPropagation;
+        console.log(event);
+        // remove the call back 
+        const mediumLikesIcon = document.getElementById(`${event.target.id}`);
+        mediumLikesIcon.removeEventListener("click", this.iLikeIt);
+        // remove the pointer cursor on hover
+        mediumLikesIcon.classList.replace("medium-card_likes-icon","medium-card_liked-icon");
+        // increment the medium likes
+        const mediumLikes = document.getElementById(`likes_${event.target.dataset.id}`);
+        let nbLikes = ~~mediumLikes.textContent + 1;
+        mediumLikes.textContent = nbLikes.toString();
+        // increment the photogrphers like 
+        this.photographerLikes ++;
+        this.displayPhotographerLikes();
+    };
+
     /**
      * @method displayPhotographerMedia() : displays the grid of photogrper's
      *      media and compute the cumulated likes to display it in the bottom
-     *      panel. Called each time the media are displayed or refreshed.
+     *      panel. Called at the page creation and each time the sort criteria
+     *      is changed
      * @assumption : the media array has been built and sorted before call.
      */
    
@@ -93,6 +226,12 @@ class FisheyePhotographer {
         this.photographerMediaArray.forEach (medium => {
             const Template = medium.createMediumArticle();
             this.mediaDiv.appendChild(Template);
+            // set call back for slideshow
+            const mediumThumbnailElement = document.getElementById(`medium_${medium.id}`);
+            mediumThumbnailElement.addEventListener("click", this.displaySlideShow);
+            // set callback for likes icon
+            const mediumLikesIcon = document.getElementById(`icon_${medium.id}`);
+            mediumLikesIcon.addEventListener("click", this.iLikeIt);
             this.photographerLikes += medium.likes; 
         });
         // display likes counter
@@ -123,6 +262,9 @@ class FisheyePhotographer {
         // keep photographer price for below right frame
         this.photographerPrice = Template.price;
         this.displayPhotographerPrice();
+        // display the photographer's name in the contact-me modal
+        const contactModalPhotographerName = document.querySelector(".contact-modal_photographer-name");
+        contactModalPhotographerName.textContent = Template.name;
     }
 
     buildPhotographerMediaArray(mediaData){
@@ -133,13 +275,49 @@ class FisheyePhotographer {
         });
     }
 
-    // callback for contact-me
-    displayContactMeForm() {
-        console.log ("contact me");
+    // callback for contact-me form closing
+    closeContactMeForm() {
+        const contactLightbox = document.getElementById("contact-lightbox");
+        contactLightbox.style.display = "";
+        const bodyElement = document.querySelector("body");
+        bodyElement.classList.remove("body-scroll-disable");
     }
+
+    // callback for contact-me form closing
+    submitContactMeForm(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // display the form fields on the console
+        console.log (`Prénom : ${document.forms.contact_form.elements.firstname.value}`);
+        console.log (`Nom : ${document.forms.contact_form.elements.name.value}`);
+        console.log (`Email : ${document.forms.contact_form.elements.email.value}`);
+        console.log (`Message : ${document.forms.contact_form.elements.message.value}`);
+
+        // hide the contact me form
+        const contactLightbox = document.getElementById("contact-lightbox");
+        contactLightbox.style.display = "";
+        // and enable scroling
+        const bodyElement = document.querySelector("body");
+        bodyElement.classList.remove("body-scroll-disable");
+    }
+
+    // callback for contact-me
+    displayContactMeForm = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const contactLightboxElement = document.getElementById("contact-lightbox");
+        contactLightboxElement.style.display = "flex";
+        const contactModalHeaderCloseButtonElement = document.getElementById("contact-modal_header_close-button");
+        contactModalHeaderCloseButtonElement.addEventListener("click", this.closeContactMeForm);
+        const bodyElement = document.querySelector("body");
+        bodyElement.classList.add("body-scroll-disable");
+        const contactModalFormElement = document.getElementById("contact-modal_form");
+        contactModalFormElement.addEventListener("submit", this.submitContactMeForm);
+    };
+
     // callback when the sortCriteria change
     sortCriteriaChange = (event) => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.sortPhotographerMedia(event.target.value);
         this.displayPhotographerMedia();
     };
@@ -157,23 +335,16 @@ class FisheyePhotographer {
         this.displayPhotographerMedia();
 
         // set-up of the call back for contact me button 
-        const contactMeButton = document.querySelector("#contact-me-button");
+        const contactMeButton = document.getElementById("contact-me-button");
         contactMeButton.addEventListener("click", this.displayContactMeForm);
 
         // set-up of the call back for sort criteria change 
-        const sortCriteriaSelect = document.querySelector("#sort-criteria");
+        const sortCriteriaSelect = document.getElementById("sort-criteria");
         sortCriteriaSelect.addEventListener("change", this.sortCriteriaChange);
     }
 }
 
 // event call back functions
-
-function displayLightBox(event)
-{
-    console.log(event);
-}
-
-
 function start() {
     // get photographer ID and convert it to a number (same format as json data)
     const pageURL = window.location.search;

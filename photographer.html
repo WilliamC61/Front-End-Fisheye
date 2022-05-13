@@ -42,7 +42,9 @@
                 <label for="sort-criteria" class="sort-criteria_label">Trier par</label>
                 <select name="sort-criteria" id="sort-criteria" class="sort-criteria_select">
                     <option value="likes" class="sort-criteria_option">Popularité</option>
+                    <optgroup label="───────"></optgroup>
                     <option value="date" class="sort-criteria_option">Date</option>
+                    <optgroup label="───────"></optgroup>
                     <option value="title" class="sort-criteria_option">Titre</option>
                 </select>
             </div>
@@ -114,23 +116,78 @@
             </div>
         </main>
 
-
         <!-- <div id="contact_modal">
                 <div class="modal">
                     <header>
-            <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" />
-            </header>
+                        <h2>Contactez-moi</h2>
+                        <img src="assets/icons/close.svg" onclick="closeModal()" />
+                    </header>
                     <form>
                         <div>
                             <label>Prénom</label>
                             <input />
                         </div>
-            <button class="contact_button">Envoyer</button>
+                        <button class="contact_button">Envoyer</button>
                     </form>
                 </div>
             </div>
-            -->
+         -->
+
+         <!-- ──── lightbox : used to grey the body when a modal is displayed. at the end to cover fully the body ── -->
+        <div id="contact-lightbox" class="contact-lightbox">
+            <div class="contact-modal">
+                <!-- ──── modal_header : includes the quit icon  ──────────────────────────────── -->
+                <div class="contact-modal_header">
+                    <h1 class="contact-modal_header_title">Contactez-moi</h1>
+                    <img class="contact-modal_header_close-button" id="contact-modal_header_close-button" src="./assets/icons/close.svg"/>
+                </div>
+                <h2 class="contact-modal_photographer-name">Mimi Keel</h2>
+                <!-- ──── modal_main : includes subcription and confirmation   ────────────────── -->
+                <div class="contact-modal_main">
+                    <!--
+                    //──── subscription form ───────────────────────────────────────────────────────
+                    --> 
+                    <form id="contact-modal_form" class="contact-modal_form" action="" name="contact_form" method="post">
+                        <!-- ──── firstname ───────────────────────────────────────────────── -->
+                        <label class="contact-modal_form_label" for="firstname">Prénom</label>
+                        <input class="contact-modal_form_input" type="text" id="firstname" name="firstname">
+                        <!-- ──── name ────────────────────────────────────────────────────── -->
+                        <label class="contact-modal_form_label" for="name">Nom</label>
+                        <input class="contact-modal_form_input" type="text" id="name" name="name">
+                        <!-- ──── email ───────────────────────────────────────────────────── -->
+                        <label class="contact-modal_form_label" for="email">Email</label>
+                        <input class="contact-modal_form_input" type="email" id="email" name="email">
+                        <!-- ──── message ─────────────────────────────────────────────────── -->
+                        <label class="contact-modal_form_label--message" for="message">Votre message</label>
+                        <textarea class="contact-modal_form_input--message" id="message" name="message" maxlength="240"></textarea>
+                        <!-- ──── form submit button  ──────────────────────────────────────── -->
+                        <div class="contact-modal_form_submit">
+                            <input type="submit" class="contact-modal_form_submit_button" value="Envoyer">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="medium-lightbox" id="medium-lightbox">
+            <div class="medium-lightbox_left">
+                <div class="medium-lightbox_left_arrow">
+                    <img class="medium-lightbox_left_arrow_icon" id="medium-lightbox_left_arrow" src="./assets/icons/empty.svg"/>
+                </div>
+            </div>
+            <div class="medium-lightbox_medium-card" id="medium-lightbox_medium-card" >
+                <img class="medium-lightbox_medium-card_image" src="./assets/media/243/Animals_Rainbow.jpg">
+                <h2 class="medium-lightbox_medium-card_legend">Arc-en-ciel</h2>
+            </div>
+            <div class="medium-lightbox_right">
+                <div class="medium-lightbox_right_arrow">
+                    <img class="medium-lightbox_right_arrow_icon" id="medium-lightbox_right_arrow" src="./assets/icons/empty.svg"/>
+                </div>
+                <div class="medium-lightbox_right_close">
+                    <img class="medium-lightbox_right_close_button" id="medium-lightbox_close_button" src="./assets/icons/empty.svg"/>
+                </div>
+            </div>
+        </div>
+        <!-- ──── JavaScript files loading  ──────────────────────────────── -->
         <script type="module" src="/scripts/pages/photographer.js"></script> 
     </body>
 </html>
