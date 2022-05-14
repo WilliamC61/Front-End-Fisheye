@@ -5,7 +5,7 @@ import { Photographer} from "../models/Photographer.js";
 class FisheyeIndex {
     constructor() {
         this.photographersSection = document.querySelector(".photographers-section");
-        this.api = new FisheyeApi("../data/photographers.json");
+        this.api = new FisheyeApi("data/photographers.json");
     }
 
     async main() {
