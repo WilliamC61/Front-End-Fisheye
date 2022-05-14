@@ -17,7 +17,7 @@ class FisheyePhotographer {
         // photographer Id is saved as reused in some methods
         this.photographerId = photographerId;
         // instantiation of the API to retrieve the data
-        this.api = new FisheyeApi("/data/photographers.json");
+        this.api = new FisheyeApi("data/photographers.json");
         // search and save the different dynamyc elements
         this.photographerDiv = document.getElementById("photographer");
         this.mediaDiv = document.getElementById("media");
