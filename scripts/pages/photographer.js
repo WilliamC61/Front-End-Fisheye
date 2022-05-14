@@ -134,7 +134,6 @@ class FisheyePhotographer {
             this.closeSlideShow(event);
             break;
         }
-        console.log(event.code);
     };
     
     /**
@@ -195,7 +194,6 @@ class FisheyePhotographer {
 
     iLikeIt = (event) => {
         event.stopPropagation;
-        console.log(event);
         // remove the call back 
         const mediumLikesIcon = document.getElementById(`${event.target.id}`);
         mediumLikesIcon.removeEventListener("click", this.iLikeIt);
@@ -317,7 +315,6 @@ class FisheyePhotographer {
 
     // callback when the sortCriteria change
     sortCriteriaChange = (event) => {
-        //console.log(event.target.value);
         this.sortPhotographerMedia(event.target.value);
         this.displayPhotographerMedia();
     };

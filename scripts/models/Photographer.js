@@ -71,7 +71,7 @@ export class Photographer {
                 <h3 class= "photographer-header_tagline">${this.tagline}</h3>
             </div>
             <button class="photographer-header_contact-button" id="contact-me-button">Contactez-moi</button>
-            <img class="photographer-header_portrait" src="../../assets/photographersIDPict/${this.portrait}">
+            <img class="photographer-header_portrait" src="assets/photographersIDPict/${this.portrait}">
         `;
         div.innerHTML= PhotographerHeader; 
         return div;
