@@ -86,7 +86,7 @@ class FisheyePhotographer {
     displaySlide() {
         const medium = this.photographerMediaArray[this.slideIndex];
         this.slideShowMediumCard.innerHTML = `
-            ${medium.slideShowElement} src="../../assets/media/${this.photographerId}/${medium.fileName}">
+            ${medium.slideShowElement} src="assets/media/${this.photographerId}/${medium.fileName}">
             <h2 class="medium-lightbox_medium-card_legend">${medium.title}</h2>
         `;
     }
@@ -159,7 +159,7 @@ class FisheyePhotographer {
     displaySlideShow= (event) => {
         // retrieve the initial medium If to initiate the slide show with the
         // clicked medium
-        const initialMediumId = ~~event.target.dataset.id;
+        const initialMediumId = Number(event.target.dataset.id);
         // search the index of the initialMediumId in the media array
         let slideIndex = 0;
         while((slideIndex !== this.photographerMediaArray.length) &&
@@ -203,7 +203,7 @@ class FisheyePhotographer {
         mediumLikesIcon.classList.replace("medium-card_likes-icon","medium-card_liked-icon");
         // increment the medium likes
         const mediumLikes = document.getElementById(`likes_${event.target.dataset.id}`);
-        let nbLikes = ~~mediumLikes.textContent + 1;
+        let nbLikes = Number(mediumLikes.textContent) + 1;
         mediumLikes.textContent = nbLikes.toString();
         // increment the photogrphers like 
         this.photographerLikes ++;

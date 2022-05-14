@@ -45,7 +45,7 @@ export class Photographer {
                 href="photographer.html?id=${this.id.toString()}"
                 aria-label="${this.name}">
                 <img class="photographers-section_article_portrait" 
-                    src="../../assets/photographersIDPict/${this.portrait}">
+                    src="assets/photographersIDPict/${this.portrait}">
                 <h2 class="photographers-section_article_name">${this.name}</h2>
             </a>
             <h3 class="photographers-section_article_location">${this.city}, ${this.country}</h3>

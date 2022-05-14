@@ -24,7 +24,7 @@ export class Medium {
                 aria-label="${this.title}">
                 ${this.thumbnailElement}
                     data-id="${this.id}"
-                    src="../../assets/media/${this.photographerId}/${this.fileName}"
+                    src="assets/media/${this.photographerId}/${this.fileName}"
                     alt="${this.title}">
             </a>
             <div class="medium-card_legend">

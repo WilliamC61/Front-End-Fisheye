@@ -319,7 +319,7 @@
         &_arrow_icon {
             color: $color-primary;
             background-color: $color-primary;
-            mask-image: url(./../../assets/icons/left.svg);
+            mask-image: url(assets/icons/left.svg);
             &:hover {
                 cursor: pointer;
             }
@@ -355,7 +355,7 @@
         &_arrow_icon {
             color: $color-primary;
             background-color: $color-primary;
-            mask-image: url(./../../assets/icons/right.svg);
+            mask-image: url(assets/icons/right.svg);
             &:hover {
                 cursor: pointer;
             }
@@ -365,7 +365,7 @@
             top: 2.1rem;
             right: 2.1rem;
             background-color: $color-primary;
-            mask-image: url(./../../assets/icons/close.svg);
+            mask-image: url(assets/icons/close.svg);
         }
         &:hover {
             cursor: pointer;
