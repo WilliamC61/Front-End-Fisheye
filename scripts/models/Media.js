@@ -23,7 +23,7 @@ export class Medium {
             <a class="medium-card_link" id="medium_${this.id}"
                 aria-label="${this.title}">
                 ${this.thumbnailElement}
-                    data-id="${this.id}"
+                    data-id="${this.id}" tabindex="0"
                     src="assets/media/${this.photographerId}/${this.fileName}"
                     alt="${this.title}">
             </a>
