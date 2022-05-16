@@ -10,7 +10,6 @@ class FisheyeIndex {
 
     async main() {
         const fisheyeData = await this.api.getData();
-        console.log(fisheyeData);
         const photographersData = fisheyeData.photographers;
         photographersData.forEach(photographer=>{
             const Template = new Photographer(photographer);
