@@ -5,7 +5,7 @@ import {Medium} from "../models/Media.js";
 
 
 /**
- * @class FisheyePhotographer : manages the page dedicated to a photogrpaher. 
+ * @class FisheyePhotographer : manages the page dedicated to a photographer. 
  */
 class FisheyePhotographer {
     /**
@@ -59,7 +59,7 @@ class FisheyePhotographer {
    
     /**
      * @method displayPhotographerPrice() : displays photographer's price per day
-     *      in the bottom panel. Called once when the photogrpher header is
+     *      in the bottom panel. Called once when the photogra      pher header is
      *      displayed.
      * @memberof FisheyePhotographer
      */
@@ -87,6 +87,7 @@ class FisheyePhotographer {
         const medium = this.photographerMediaArray[this.slideIndex];
         this.slideShowMediumCard.innerHTML = `
             ${medium.slideShowElement} src="assets/media/${this.photographerId}/${medium.fileName}">
+            ${medium.slideShowEndElement}             
             <h2 class="medium-lightbox_medium-card_legend">${medium.title}</h2>
         `;
     }
@@ -191,6 +192,15 @@ class FisheyePhotographer {
         // set call back for key press
         document.addEventListener("keydown", this.mediumLightboxKeydown);
     };
+/**
+     * @method iLikeIt() : manage the click on like icon:
+     *      - stop propagation of the event
+     *      - removal of the event listening to avoid double like.
+     *      - class change to indicate that the click is not possible
+     *         and change iconcolor to show it was liked
+     *      - increments both unitary and global counters, and display them.
+     * 
+     */
 
     iLikeIt = (event) => {
         event.stopPropagation;
@@ -237,8 +247,9 @@ class FisheyePhotographer {
     }
 
     /**
-     * @method : displayPhotographerHeaders : display the photographer header 
-     *      whose ID match the ID given in parameter 
+     * @method : displayPhotographerHeaders() : display the header for the 
+     *      photographer whose ID match the ID retrieved from the url and
+     *      stoped in the photogrpaher class
      * @param {Array of photographer data} photographersData : photogrpahers
      *      data part of the API. 
      */
@@ -265,6 +276,12 @@ class FisheyePhotographer {
         contactModalPhotographerName.textContent = Template.name;
     }
 
+    /**
+     * @method : buildPhotographerMediaArrayHeaders() : build the media array
+     *      of the photographer from the media data passed in parameter.
+     * @param {mediaData} media data read via the API
+     *      data part of the API. 
+     */
     buildPhotographerMediaArray(mediaData){
         mediaData.forEach(medium=>{
             if (medium.photographerId === this.photographerId){
@@ -272,25 +289,16 @@ class FisheyePhotographer {
             }
         });
     }
-
-    // callback for contact-me form closing
-    closeContactMeForm() {
-        const contactLightbox = document.getElementById("contact-lightbox");
-        contactLightbox.style.display = "";
-        const bodyElement = document.querySelector("body");
-        bodyElement.classList.remove("body-scroll-disable");
-    }
-
-    // callback for contact-me form closing
-    submitContactMeForm(event) {
+    /**
+     * @method : closeContactMeForm(): callback for contact-me form closing
+     *      - stop propagation of the event et disable default behavior
+     *      - close the contact me form
+     *      - enable back body scrolling
+     */
+    closeContactMeForm = (event) => {
+        // stop propagation of the event et disable default behavior
         event.preventDefault();
         event.stopPropagation();
-        // display the form fields on the console
-        console.log (`Prénom : ${document.forms.contact_form.elements.firstname.value}`);
-        console.log (`Nom : ${document.forms.contact_form.elements.name.value}`);
-        console.log (`Email : ${document.forms.contact_form.elements.email.value}`);
-        console.log (`Message : ${document.forms.contact_form.elements.message.value}`);
-
         // hide the contact me form
         const contactLightbox = document.getElementById("contact-lightbox");
         contactLightbox.style.display = "";
@@ -298,19 +306,50 @@ class FisheyePhotographer {
         const bodyElement = document.querySelector("body");
         bodyElement.classList.remove("body-scroll-disable");
     }
-
-    // callback for contact-me
+    /**
+     * @method : submitContactMeForm(): callback for contact-me form submission
+     *      - displays the four input fields on the console
+     *      - call closeContactMeForm to close the modal 
+     *  @param {event} event listen on the submit bouton.
+     */
+    submitContactMeForm = (event) => {
+        // display the form fields on the console
+        console.log (`Prénom : ${document.forms.contact_form.elements.firstname.value}`);
+        console.log (`Nom : ${document.forms.contact_form.elements.name.value}`);
+        console.log (`Email : ${document.forms.contact_form.elements.email.value}`);
+        console.log (`Message : ${document.forms.contact_form.elements.message.value}`);
+        // call closeContactMeForm
+        this.closeContactMeForm(event);
+    }
+    /**
+     * @method : displayContactMeForm(): callback for contact me form display
+     *      - stop propagation of the event et disable default behavior
+     *      - displays the Contact me form
+     *      - disable scrolling
+     *      - listen click on close icon
+     *      - listen click on close icon and submit button
+     *  @param {event} event listen on the Contact Me bouton
+     *      data. 
+     */
     displayContactMeForm = (event) => {
+        // stop propagation of the event et disable default behavior
         event.preventDefault();
         event.stopPropagation();
+        // Display the form
         const contactLightboxElement = document.getElementById("contact-lightbox");
         contactLightboxElement.style.display = "flex";
-        const contactModalHeaderCloseButtonElement = document.getElementById("contact-modal_header_close-button");
-        contactModalHeaderCloseButtonElement.addEventListener("click", this.closeContactMeForm);
+        // disable scrolling
         const bodyElement = document.querySelector("body");
         bodyElement.classList.add("body-scroll-disable");
+        // listen click on close icon
+        const contactModalHeaderCloseButtonElement = document.getElementById("contact-modal_header_close-button");
+        contactModalHeaderCloseButtonElement.addEventListener("click", this.closeContactMeForm);
+        //listen submit of the form
         const contactModalFormElement = document.getElementById("contact-modal_form");
         contactModalFormElement.addEventListener("submit", this.submitContactMeForm);
+        // set focus on name firstname input field
+        const contactMeFormFirstnamneElement = document.getElementById("firstname");
+        contactMeFormFirstnamneElement.focus();
     };
 
     // callback when the sortCriteria change

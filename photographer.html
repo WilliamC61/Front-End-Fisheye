@@ -14,27 +14,28 @@
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
         <!-- use of font awesome via bootstrap CDN -->
         <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+        <!-- page title and favicon -->
         <title>Fisheye</title>
         <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
-        <title>Fisheye - photographe </title>
     </head>
     <body>
         <header class="header">
             <a class="header_link" href="index.html">
-                <img src="assets/images/logo.png" class="header_logo" alt="Fisheye Home page"/>
+                <img src="assets/images/logo.png" class="header_logo" alt="Fisheye Home page" aria-label="retourner à la page principale"/>
             </a>
             </header>
         <main id="main">
             <div id="photographer">
+                <!-- content is dynamically created by JS  -->
             </div>
             <div class="sort-criteria">
                 <label for="sort-criteria" class="sort-criteria_label">Trier par</label>
-                <select name="sort-criteria" id="sort-criteria" class="sort-criteria_select">
-                    <option value="likes" class="sort-criteria_option">Popularité</option>
+                <select name="sort-criteria" id="sort-criteria" class="sort-criteria_select" aria-label="choix du critère de tri">
+                    <option value="likes" class="sort-criteria_option" aria-label="tri par popularité">Popularité</option>
                     <optgroup label="───────"></optgroup>
-                    <option value="date" class="sort-criteria_option">Date</option>
+                    <option value="date" class="sort-criteria_option" aria-label="tri par date">Date</option>
                     <optgroup label="───────"></optgroup>
-                    <option value="title" class="sort-criteria_option">Titre</option>
+                    <option value="title" class="sort-criteria_option" aria-label="par titre">Titre</option>
                 </select>
             </div>
             <div id="media">
@@ -49,11 +50,11 @@
         </main>
          <!-- ──── lightbox : used to grey the body when a modal is displayed. at the end to cover fully the body ── -->
         <div id="contact-lightbox" class="contact-lightbox">
-            <div class="contact-modal">
+            <div class="contact-modal" role="dialog" aria-modal="true" tabindex="-1">
                 <!-- ──── modal_header : includes the quit icon  ──────────────────────────────── -->
                 <div class="contact-modal_header">
                     <h1 class="contact-modal_header_title">Contactez-moi</h1>
-                    <img class="contact-modal_header_close-button" id="contact-modal_header_close-button" src="./assets/icons/close.svg"/>
+                    <img class="contact-modal_header_close-button" id="contact-modal_header_close-button" src="./assets/icons/close.svg" tabindex="1"/>
                 </div>
                 <h2 class="contact-modal_photographer-name">Mimi Keel</h2>
                 <!-- ──── modal_main : includes subcription and confirmation   ────────────────── -->
@@ -64,19 +65,19 @@
                     <form id="contact-modal_form" class="contact-modal_form" action="" name="contact_form" method="post">
                         <!-- ──── firstname ───────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="firstname">Prénom</label>
-                        <input class="contact-modal_form_input" type="text" id="firstname" name="firstname">
+                        <input class="contact-modal_form_input" type="text" id="firstname" name="firstname" tabindex="1">
                         <!-- ──── name ────────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="name">Nom</label>
-                        <input class="contact-modal_form_input" type="text" id="name" name="name">
+                        <input class="contact-modal_form_input" type="text" id="name" name="name" tabindex="1">
                         <!-- ──── email ───────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="email">Email</label>
-                        <input class="contact-modal_form_input" type="email" id="email" name="email">
+                        <input class="contact-modal_form_input" type="email" id="email" name="email"  tabindex="1">
                         <!-- ──── message ─────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label--message" for="message">Votre message</label>
-                        <textarea class="contact-modal_form_input--message" id="message" name="message" maxlength="240"></textarea>
+                        <textarea class="contact-modal_form_input--message" id="message" name="message" maxlength="240" tabindex="1"></textarea>
                         <!-- ──── form submit button  ──────────────────────────────────────── -->
                         <div class="contact-modal_form_submit">
-                            <input type="submit" class="contact-modal_form_submit_button" value="Envoyer">
+                            <input type="submit" class="contact-modal_form_submit_button" value="Envoyer" tabindex="1">
                         </div>
                     </form>
                 </div>

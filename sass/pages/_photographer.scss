@@ -1,3 +1,12 @@
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * @div .photographer-header : contains photographer data : presentation (name,
+ *      location, tagline) contact-me button and id portrait
+ *      Flexbox with equal space between the elements which are vertically
+ *      centered
+ */
+//──────────────────────────────────────────────────────────────────────────────
+
 .photographer-header {
     background-color: $color-verylightgrey;
     height: 30rem;
@@ -7,30 +16,35 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    // @div presentation to align vertically name,  location and tagline 
     &_presentation {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
+    // @class name : style of name
     &_name {
         font-weight: 400;
         font-size: 6.4rem;
         line-height: 8.333rem;
         color: $color-secondary;
     }
+    // @class location : style of location
     &_location {
         font-weight: 400;
         font-size: 2.4rem;
         line-height: 3.125rem;
         color: $color-primary;
     }
+    // @class tagline : style of tagline
     &_tagline {
         font-weight: 400;
         font-size: 1.8rem;
         line-height: 2.344rem;
         color: $color-darkgrey;
     }
+    // @button contact-button : 
     &_contact-button {
         border: 0;
         border-radius: 0.5rem;
@@ -55,76 +69,19 @@
     }
 }
 
-#media{
-    margin: 0 6rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
-    margin-top: 10rem;
-    align-items: start;
-}
-
-.medium-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    &_img, &_video {
-        width: 35rem;
-        height: 30rem;
-        border:0;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        object-fit: cover; 
-        &:hover {
-            cursor: pointer;
-        }  
-    }
-    &_legend {
-        width: 35rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        //align-items: center;
-    }
-    &_title {
-        width: 28rem;
-        display: block;
-        font-size: 2.4rem;
-        line-height: 3.125rem;
-        font-weight: 400;
-        color: $color-primary;
-    }
-    &_likes {
-        display: block;
-        font-size: 2.4rem;
-        line-height: 3.125rem;
-        font-weight: 400;
-        color: $color-primary;
-    }
-    &_likes-icon {
-        padding-left: 0.6rem;
-        display: block;
-        font-size: 2.4rem;
-        line-height: 3.125rem;
-        font-weight: 400;
-        color: $color-primary;
-        &:hover {
-            cursor: pointer;
-        }
-    }
-    &_liked-icon {
-        padding-left: 0.6rem;
-        display: block;
-        font-size: 2.4rem;
-        line-height: 3.125rem;
-        font-weight: 400;
-        color: $color-secondary;
-    }
-}
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * @div sort-criteria : container for the sort criteria select element
+ */
+//──────────────────────────────────────────────────────────────────────────────
 
 .sort-criteria {
     margin: 2rem 10rem;
+    &:hover, &:focus {
+        border: 0.1rem;
+        border-color: blue;
+        border-radius: 0.3rem;
+    }
     &_label {
         font-weight: 700;
         font-size: 1.8rem;
@@ -161,6 +118,144 @@
    
 }
 
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * @div sort-criteria : container for the sort criteria select element
+ */
+//──────────────────────────────────────────────────────────────────────────────
+
+.sort-criteria {
+    margin: 2rem 10rem;
+    
+    &_label {
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 2.344rem;
+    }
+    &_select {
+        outline:0;
+        border: 0;
+        box-shadow: none;
+        background: $color-primary;
+        box-shadow: none;
+        border-radius: 0.5rem;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 2.344rem;
+        color: $color-white;
+        // accessibility requirement                        
+        &:hover, &:focus {
+            cursor: pointer;
+            background: $color-secondary;
+            border: 10      rem;
+            border-color: blue;
+            border-radius: 0.5rem;
+        }
+    }
+    &_option {
+        appearance: none;
+        outline:0;
+        border:none;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 2.344rem;
+        background-color: $color-secondary;
+        color: $color-white;
+    }
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * <div> #media : contains the media gallery dynamically generated by JS.
+ */
+//──────────────────────────────────────────────────────────────────────────────
+#media{
+    margin: 0 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    align-items: start;
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * <div> .medium-card : contains the card of a medium : thumbnail (img or 
+ *      video), legend (title and likes).
+ */
+//──────────────────────────────────────────────────────────────────────────────
+.medium-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // thumbnail format
+    &_img, &_video {
+        width: 35rem;
+        height: 30rem;
+        border:0;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        object-fit: cover; 
+        &:hover {
+            cursor: pointer;
+        }  
+    }
+    // legend flex div to have title and likes left and right justified
+    &_legend {
+        width: 35rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items:baseline;
+    }
+    // medium title style
+    &_title {
+        width: 28rem;
+        font-size: 2.4rem;
+        line-height: 3.125rem;
+        font-weight: 400;
+        color: $color-primary;
+    }
+    // @class likes : style of likes number
+    &_likes {
+        font-size: 2.4rem;
+        line-height: 3.125rem;
+        font-weight: 400;
+        color: $color-primary;
+    }
+    // @class likes-icon : icon defaults style (if not liked by user)  
+    &_likes-icon {
+        padding-left: 0.6rem;
+        font-size: 2.4rem;
+        line-height: 3.125rem;
+        font-weight: 400;
+        color: $color-primary;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    // @class liked-icon : icon style when the medium was liked
+    &_liked-icon {
+        padding-left: 0.6rem;
+        display: block;
+        font-size: 2.4rem;
+        line-height: 3.125rem;
+        font-weight: 400;
+        color: $color-secondary;
+    }
+}
+
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * @div likes-and-price : container for the bottom panel displaying total likes
+ *      and price per day           
+ */
+//──────────────────────────────────────────────────────────────────────────────
+
 .likes-and-price {
     width: 37.6rem;
     height: 6.7rem;
@@ -181,7 +276,7 @@
     &_likes {
         display: inline-block;
     }
-    &_likes-icon {
+    &_likes-icon {          
         padding-left: 0.6rem;
     }
     &_price {
@@ -191,7 +286,7 @@
 
 //──────────────────────────────────────────────────────────────────────────────
 /*
- * <div> cointat-lightbox
+ * <div> contact-lightbox
  * 
  * It is used to cover all the page body when the contact modal window is 
  * displayed. It is declared at the end of the body to actually cover
@@ -296,6 +391,18 @@
 .body-scroll-disable {
    overflow: hidden;
 }
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * <div> medium-lightbox
+ * 
+ * It is used to cover all the page body when the slide show modal window is 
+ * displayed. It is declared at the end of the body to actually cover
+ * everything. It is displayed on the click on a medium in the galerry button,
+ * and closed when the slide show window is closed.
+ * This is managed by the JavaScript code in script/pages/photogrpher.js.
+ * z-index:1 is used to cover the main window.
+ */
+//──────────────────────────────────────────────────────────────────────────────
 
 .medium-lightbox {
     display: none; // initally the light box is not displayed
@@ -308,7 +415,6 @@
     background: $color-white;
     z-index: 1; // to cover main window.
     padding-top: 6.2rem;
-  
     &_left {
         width: 8.4rem;
         display: flex;
@@ -326,16 +432,18 @@
     }
     &_medium-card {
         &_image {
-            //width: 50rem;
-           height: 84rem;
+            height: 84rem;
+            max-width: 100rem;
+            margin: 0 auto;
             border-radius: 0.5rem;
-            object-fit: cover;
+            object-fit: contain;
         }
         &_video {
-            //width: 50rem;
-           height: 84rem;
+           height: 70rem;
+           //height: 84vh;
+           //max-width: 88%;
            border-radius: 0.5rem;
-           object-fit: cover;
+           object-fit: scale-down;
         }
         &_legend {
             padding-bottom: 1.5rem;

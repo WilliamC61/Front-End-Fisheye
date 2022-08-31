@@ -2,7 +2,7 @@
 
 import {FisheyeApi} from "../api/Api.js";
 import { Photographer} from "../models/Photographer.js";
-class FisheyeIndex {
+class FisheyeMain {
     constructor() {
         this.photographersSection = document.querySelector(".photographers-section");
         this.api = new FisheyeApi("data/photographers.json");
@@ -19,7 +19,7 @@ class FisheyeIndex {
 }
 
 function start() {
-    const app = new FisheyeIndex();
+    const app = new FisheyeMain();
     app.main();
 }
 

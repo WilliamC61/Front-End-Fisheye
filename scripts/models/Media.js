@@ -29,7 +29,7 @@ export class Medium {
             </a>
             <div class="medium-card_legend">
                 <h2 class="medium-card_title">${this.title}</h2>
-                <span class="medium-card_likes" id="likes_${this.id}">${this.likes}</span><span><i id="icon_${this.id}" data-id="${this.id}" class="medium-card_likes-icon fas fa-heart"></i>
+                <span class="medium-card_likes" id="likes_${this.id}">${this.likes}</span><span><i aria-label="J'aime" id="icon_${this.id}" data-id="${this.id}" class="medium-card_likes-icon fas fa-heart"></i>
             </div>
         `;
         article.innerHTML= MediumArticle; 
@@ -42,7 +42,9 @@ export class Image extends Medium {
     constructor(data) {
         super(data);
         this.thumbnailElement = "<img class=\"medium-card_img\" ";
+        this.thumbnailEndElement = "";
         this.slideShowElement = "<img class=\"medium-lightbox_medium-card_image\" ";
+        this.slideShowEndElement = "";
         this.fileName = data.image;
     }
     get(property) {
@@ -58,7 +60,9 @@ export class Video extends Medium {
     constructor(data) {
         super(data);
         this.thumbnailElement = "<video class=\"medium-card_video\" ";
+        this.thumbnailendElement = "</video>";
         this.slideShowElement = "<video controls class=\"medium-lightbox_medium-card_video\" ";
+        this.slideShowEndElement = "</video>";
         this.fileName = data.video;
     }
     get(property) {
