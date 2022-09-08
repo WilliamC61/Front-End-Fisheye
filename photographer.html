@@ -56,7 +56,7 @@
                 <!-- ──── modal_header : includes the quit icon  ──────────────────────────────── -->
                 <div class="contact-modal_header">
                     <h1 id="contact-modal_header_title" class="contact-modal_header_title">Contactez-moi</h1>
-                    <img class="contact-modal_header_close-button focusable" id="contact-modal_header_close-button" src="./assets/icons/close.svg" tabindex="0"/>
+                    <img class="contact-modal_header_close-button focusable" data-index="0"id="contact-modal_header_close-button" src="./assets/icons/close.svg" tabindex="0"/>
                 </div>
                 <h2 class="contact-modal_photographer-name">Mimi Keel</h2>
                 <!-- ──── modal_main : includes subcription and confirmation   ────────────────── -->
@@ -67,19 +67,19 @@
                     <form id="contact-modal_form" class="contact-modal_form" action="" name="contact_form" method="post">
                         <!-- ──── firstname ───────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="firstname">Prénom</label>
-                        <input class="contact-modal_form_input focusable" type="text" id="firstname" name="firstname" tabindex="0">
+                        <input class="contact-modal_form_input focusable" data-index="1" type="text" id="firstname" name="firstname" tabindex="0">
                         <!-- ──── name ────────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="name">Nom</label>
-                        <input class="contact-modal_form_input focusable" type="text" id="name" name="name" tabindex="0">
+                        <input class="contact-modal_form_input focusable" data-index="2" type="text" id="name" name="name" tabindex="0">
                         <!-- ──── email ───────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="email">Email</label>
-                        <input class="contact-modal_form_input focusable" type="email" id="email" name="email"  tabindex="0">
+                        <input class="contact-modal_form_input focusable" data-index="3" type="email" id="email" name="email"  tabindex="0">
                         <!-- ──── message ─────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label--message" for="message">Votre message</label>
-                        <textarea class="contact-modal_form_input--message focusable" id="message" name="message" maxlength="240" tabindex="0"></textarea>
+                        <textarea class="contact-modal_form_input--message focusable" data-index="4" id="message" name="message" maxlength="240" tabindex="0"></textarea>
                         <!-- ──── form submit button  ──────────────────────────────────────── -->
                         <div class="contact-modal_form_submit ">
-                            <input type="submit" class="contact-modal_form_submit_button focusable" value="Envoyer" tabindex="0">
+                            <input type="submit" class="contact-modal_form_submit_button focusable" data-index="5" value="Envoyer" tabindex="0">
                         </div>
                     </form>
                 </div>

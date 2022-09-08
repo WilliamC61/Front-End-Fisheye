@@ -351,7 +351,12 @@ class FisheyePhotographer {
     const contactModalFormElement = document.getElementById("contact-modal_form");
     contactModalFormElement.addEventListener("submit", this.submitContactModalForm);
 };
-
+    /**
+     * @method : clickOutsideModal(): callback when a clik is done outside the modal,
+     *      i.e. on thesurrouinding lightbox. 
+     *      The modal is the closed by calling closeContactModal().
+     * @param {*} event 
+     */
     clickOutsideModal = (event) => {
         if (event.target === document.getElementById("contact-lightbox")) {
             this.closeContactModal(event);
@@ -384,7 +389,7 @@ class FisheyePhotographer {
         contactMeButtonElement.focus();
     }
     /**
-     * @method : submitContactModalForm(): callback for contact modal form submission  submission
+     * @method : submitContactModalForm(): callback for contact modal form submission
      *      - displays the four input fields on the console
      *      - call closeContactModal to close the modal 
      *  @param {event} event listen on the submit bouton.
@@ -400,11 +405,26 @@ class FisheyePhotographer {
         // and reset data
         document.forms.contact_form.reset();
     }
-    
+    /**
+     * @method : contactModalKeydown(): callback for key press on contact modal.
+     *      purpoose is to trap focus inside the modal. 4 keys are managed:
+     *      - Tab : set focus to close button (first focusable field) if focus on
+     *        submit button (last focusable), otherwise default Tab management
+     *      - Shift-Tab : set focus to submit button (last focusable field) if focus on
+     *        close button (last focusable), otherwise default Shift-Tab management
+     *      - Enter : set focus on next focusable field for field index 1,2,3 (firstname,
+     *        name and email) otherwise default behavior, i.e. close if on close button
+     *        and submit if on submit butoon, and line feed if on message field
+     *      - Esc : close the modal
+     *      Call closeContactModal and submitContactModalForm to close the modal or submit
+     *      the modal form 
+     *  @param {event} event listen on the submit bouton.
+     */
     contactModalKeydown = (event) => {
         switch(event.key) {
             // Tab or shift-Tab => compute new focused field
             case "Tab":
+                // test if tab or Shift-Tab
                 if (event.shiftKey) {
                     // shift Tab
                     if (event.target == this.contactModalFirstFocusableField) {
@@ -422,16 +442,22 @@ class FisheyePhotographer {
                     event.stopPropagation();
                 }
                 break;
-            // enter : active only on validation           
+            // enter : do something if on close, submit or firsname, name and email           
             case "Enter":
                 if (event.target == this.contactModalFirstFocusableField) {
+                    // on close button => close the modal 
                     this.closeContactModal(event);
                 }  else if (event.target == this.contactModalLastFocusableField) {
-                    this.submitContactModal(event);
-                }
-                else {
-                    event.preventDefault();
-                    event.stopPropagation();
+                    // on submit button => submit the form
+                    this.submitContactModalForm(event);
+                } else {
+                    const fieldIndex = Number(event.target.dataset.index);
+                    if (fieldIndex >=1 && fieldIndex <= 3) {
+                        // on field FirstName, Name or email => set focus on next field
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.contactModalFocusableFieldsArray[fieldIndex+1].focus();
+                    }
                 }
                 break;
             case "Escape":
