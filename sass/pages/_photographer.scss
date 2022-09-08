@@ -174,13 +174,13 @@
  */
 //──────────────────────────────────────────────────────────────────────────────
 #media{
-    margin: 0 6rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
+    margin: 0 10rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
     padding-top: 10rem;
     padding-bottom: 10rem;
-    align-items: start;
 }
 
 //──────────────────────────────────────────────────────────────────────────────
@@ -192,8 +192,9 @@
 .medium-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content:start;
     align-items: center;
+    height: 37.0rem;
     // thumbnail format
     &_img, &_video {
         width: 35rem;

@@ -34,16 +34,18 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 .photographers-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 7rem;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-between;
     margin-top: 10rem;
     &_article {
-        justify-self: center;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        width: 40rem;
+        height: 35.8rem;
         &_portrait {
             height: 20rem;
             width: 20rem;
