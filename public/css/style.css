@@ -593,7 +593,7 @@ button {
   bottom: 0;
   right: 0;
   background: rgba(196, 196, 196, 0.4);
-  z-index: 1;
+  z-index: 2;
 }
 
 .contact-modal {
@@ -761,7 +761,7 @@ button {
 
 .medium-lightbox_medium-card_image {
   height: 84rem;
-  max-width: 100rem;
+  width: 100rem;
   margin: 0 auto;
   border-radius: 0.5rem;
   -o-object-fit: contain;
@@ -769,10 +769,12 @@ button {
 }
 
 .medium-lightbox_medium-card_video {
-  height: 70rem;
+  height: 84rem;
+  width: 100rem;
+  margin: 0 auto;
   border-radius: 0.5rem;
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .medium-lightbox_medium-card_legend {

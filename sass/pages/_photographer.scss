@@ -433,17 +433,17 @@
     &_medium-card {
         &_image {
             height: 84rem;
-            max-width: 100rem;
+            width: 100rem;
             margin: 0 auto;
             border-radius: 0.5rem;
             object-fit: contain;
         }
         &_video {
-           height: 70rem;
-           //height: 84vh;
-           //max-width: 88%;
+           height: 84rem;
+           width: 100rem;
+           margin: 0 auto;
            border-radius: 0.5rem;
-           object-fit: scale-down;
+           object-fit: contain;
         }
         &_legend {
             padding-bottom: 1.5rem;

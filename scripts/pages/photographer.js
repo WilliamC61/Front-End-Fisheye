@@ -141,25 +141,34 @@ class FisheyePhotographer {
     };
     
     /**
-     * @method DisplaySlideShow : initialization and display of the slide show
+     * @method DisplaySlideShow :  call back to initializes and displays the slide show
      *      of the photographer's media. 
-     *      The Id of clicked medium is retrieved using dataset.id of the
-     *      medium target of the event. mei displaying the media which Id is obtain  given in
-     *      parameter.
+     *      it is called on click and keydown event. for keydown, only enter key is managed.
+     *      type of event is checked first, if keydown and not Enter then nothing is done,
+     *      otherwise same processing is done :
+     *      The Id of current medium is retrieved using dataset.id of the
+     *      medium target of the event.
      *      The index of this medium is then searched in the media array to
      *      initialize the slide show index.
      *      Proper call back are set up for button click and arrow press, the
      *      scrolling is disabled. 
      *      The slide show is then event driven with the methods nextSlide,
      *      previousSlide and closeSlideShow.
-     *      The media are displayed in a loop : with next, when last one is reached, next
-     *      one is first. Same management for previous.
+     *      The media are displayed in a loop : with next on last move to first, and
+     *      previous on first move to last.
+     *      Medium title is always displayed as the same place whatever the size of the
+     *      medium.
      *
      * @param {event} click event on a medium
      * @throw error message if the medium id is not found in the media arry
      * @memberof FisheyePhotographer
      */
     displaySlideShow= (event) => {
+        // if key but not Enter, to nothing and exit
+        if (event.type === "keydown" && event.key != "Enter") {
+            return;
+        }
+        // here it is Enter or click
         // retrieve the initial medium Id to initiate the slide show with the
         // clicked medium
         const initialMediumId = Number(event.target.dataset.id);
@@ -243,9 +252,13 @@ class FisheyePhotographer {
         this.photographerMediaArray.forEach (medium => {
             const Template = medium.createMediumArticle();
             this.mediaDiv.appendChild(Template);
-            // set call back for slideshow
+            // set call back for slideshow launch by mouse click or Enter
             const mediumThumbnailElement = document.getElementById(`medium_${medium.id}`);
+            // click
             mediumThumbnailElement.addEventListener("click", this.displaySlideShow);
+            // key down
+            mediumThumbnailElement.addEventListener("keydown", this.displaySlideShow);
+            
             // set callback for likes icon
             const mediumLikesIcon = document.getElementById(`icon_${medium.id}`);
             mediumLikesIcon.addEventListener("click", this.iLikeIt);
@@ -339,7 +352,7 @@ class FisheyePhotographer {
     this.contactModalFirstFocusableField.focus();
     // listen key press on each focusable field
     this.contactModalFocusableFieldsArray.forEach((focusableElement) => {
-        focusableElement.addEventListener('keydown', this.contactModalKeydown);
+        focusableElement.addEventListener("keydown", this.contactModalKeydown);
     });
     // listen click on close icon
     const contactModalHeaderCloseButtonElement = document.getElementById("contact-modal_header_close-button");
