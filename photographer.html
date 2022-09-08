@@ -18,13 +18,13 @@
         <title>Fisheye</title>
         <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
     </head>
-    <body>
+    <body id="body">
         <header class="header">
             <a class="header_link" href="index.html">
                 <img src="assets/images/logo.png" class="header_logo" alt="Fisheye Home page" aria-label="retourner à la page principale"/>
             </a>
-            </header>
-        <main id="main">
+        </header>
+        <main id="main" aria-hidden="false">
             <div id="photographer">
                 <!-- content is dynamically created by JS  -->
             </div>
@@ -39,22 +39,24 @@
                 </select>
             </div>
             <div id="media">
-                
+                <!-- content is dynamically created by JS  -->
             </div>
             <div id="likes-and-price" class="likes-and-price">
                 <div id = "likes">
+                    <!-- content is dynamically created by JS  -->
                 </div>
                 <div id ="price">
+                    <!-- content is dynamically created by JS  -->
                 </div>
             </div>
         </main>
          <!-- ──── lightbox : used to grey the body when a modal is displayed. at the end to cover fully the body ── -->
         <div id="contact-lightbox" class="contact-lightbox">
-            <div class="contact-modal" role="dialog" aria-modal="true" tabindex="-1">
+            <div id="contact-modal" class="contact-modal" aria-hidden="true" role="dialog" aria-describedby="contact-modal_header_title" aria-modal="true" tabindex="-1">
                 <!-- ──── modal_header : includes the quit icon  ──────────────────────────────── -->
                 <div class="contact-modal_header">
-                    <h1 class="contact-modal_header_title">Contactez-moi</h1>
-                    <img class="contact-modal_header_close-button" id="contact-modal_header_close-button" src="./assets/icons/close.svg" tabindex="1"/>
+                    <h1 id="contact-modal_header_title" class="contact-modal_header_title">Contactez-moi</h1>
+                    <img class="contact-modal_header_close-button focusable" id="contact-modal_header_close-button" src="./assets/icons/close.svg" tabindex="0"/>
                 </div>
                 <h2 class="contact-modal_photographer-name">Mimi Keel</h2>
                 <!-- ──── modal_main : includes subcription and confirmation   ────────────────── -->
@@ -65,19 +67,19 @@
                     <form id="contact-modal_form" class="contact-modal_form" action="" name="contact_form" method="post">
                         <!-- ──── firstname ───────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="firstname">Prénom</label>
-                        <input class="contact-modal_form_input" type="text" id="firstname" name="firstname" tabindex="1">
+                        <input class="contact-modal_form_input focusable" type="text" id="firstname" name="firstname" tabindex="0">
                         <!-- ──── name ────────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="name">Nom</label>
-                        <input class="contact-modal_form_input" type="text" id="name" name="name" tabindex="1">
+                        <input class="contact-modal_form_input focusable" type="text" id="name" name="name" tabindex="0">
                         <!-- ──── email ───────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label" for="email">Email</label>
-                        <input class="contact-modal_form_input" type="email" id="email" name="email"  tabindex="1">
+                        <input class="contact-modal_form_input focusable" type="email" id="email" name="email"  tabindex="0">
                         <!-- ──── message ─────────────────────────────────────────────────── -->
                         <label class="contact-modal_form_label--message" for="message">Votre message</label>
-                        <textarea class="contact-modal_form_input--message" id="message" name="message" maxlength="240" tabindex="1"></textarea>
+                        <textarea class="contact-modal_form_input--message focusable" id="message" name="message" maxlength="240" tabindex="0"></textarea>
                         <!-- ──── form submit button  ──────────────────────────────────────── -->
-                        <div class="contact-modal_form_submit">
-                            <input type="submit" class="contact-modal_form_submit_button" value="Envoyer" tabindex="1">
+                        <div class="contact-modal_form_submit ">
+                            <input type="submit" class="contact-modal_form_submit_button focusable" value="Envoyer" tabindex="0">
                         </div>
                     </form>
                 </div>

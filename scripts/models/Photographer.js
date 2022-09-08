@@ -57,7 +57,7 @@ export class Photographer {
     }
 
     /**
-     * @method createPhotographerHeader : generate photographer's header for photogrpher's page 
+     * @method createPhotographerHeader : generate photographer's header for photographer's page 
      * @return {div element} the photographer's header div element 
      * @memberof Photographer
      */
@@ -70,7 +70,9 @@ export class Photographer {
                 <h2 class="photographer-header_location">${this.city}, ${this.country}</h2>
                 <h3 class= "photographer-header_tagline">${this.tagline}</h3>
             </div>
-            <button class="photographer-header_contact-button" aria-label="ouvre la fenêtre de contact" id="contact-me-button">Contactez-moi</button>
+            <button type="button" aria-haspopup="dialog" aria-controls="contact-modal"aria-label="ouvre la fenêtre de contact"
+                class="photographer-header_contact-button" id="contact-me-button">Contactez-moi
+            </button>
             <img class="photographer-header_portrait" src="assets/photographersIDPict/${this.portrait}">
         `;
         div.innerHTML= PhotographerHeader; 
