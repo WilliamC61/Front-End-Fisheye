@@ -390,7 +390,13 @@
         }
     }
 }
-
+//──────────────────────────────────────────────────────────────────────────────
+/*
+ * class body-scroll-disable
+ * 
+ * It is used to disable the body scrolling when a lightbox is displayed
+ */
+//──────────────────────────────────────────────────────────────────────────────
 .body-scroll-disable {
    overflow: hidden;
 }
@@ -436,7 +442,6 @@
     &_medium-card {
         &_image {
             height: 84rem;
-            width: 100rem;
             margin: 0 auto;
             border-radius: 0.5rem;
             object-fit: contain;
