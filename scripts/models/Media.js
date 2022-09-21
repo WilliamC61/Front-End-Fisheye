@@ -20,8 +20,7 @@ export class Medium {
         const article = document.createElement("article");
         article.classList.add("medium-card");
         const MediumArticle = `
-            <div class="medium-card_medium" id="medium_${this.id}"
-                aria-label="${this.title}">
+            <div class="medium-card_medium" id="medium_${this.id}">
                 ${this.thumbnailElement}
                     data-id="${this.id}" tabindex="0"
                     src="assets/media/${this.photographerId}/${this.fileName}"
@@ -29,7 +28,9 @@ export class Medium {
             </div>
             <div class="medium-card_legend">
                 <h2 class="medium-card_title">${this.title}</h2>
-                <span class="medium-card_likes" id="likes_${this.id}">${this.likes}</span><span><i aria-label="J'aime" id="icon_${this.id}" data-id="${this.id}" class="medium-card_likes-icon fas fa-heart"></i>
+                <span class="medium-card_likes" id="likes_${this.id}">${this.likes}</span>
+                <button aria-label="J'aime" id="icon_${this.id}" data-id="${this.id}" class="medium-card_likes-icon fas fa-heart">
+                </button>
             </div>
         `;
         article.innerHTML= MediumArticle; 

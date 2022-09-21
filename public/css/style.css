@@ -514,6 +514,8 @@ button {
   line-height: 3.125rem;
   font-weight: 400;
   color: #901C1C;
+  background-color: white;
+  border: none;
 }
 
 .medium-card_likes-icon:hover {
@@ -527,6 +529,8 @@ button {
   line-height: 3.125rem;
   font-weight: 400;
   color: #D3573C;
+  background-color: white;
+  border: none;
 }
 
 /*
