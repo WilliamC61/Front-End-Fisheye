@@ -20,13 +20,13 @@ export class Medium {
         const article = document.createElement("article");
         article.classList.add("medium-card");
         const MediumArticle = `
-            <a class="medium-card_link" id="medium_${this.id}"
+            <div class="medium-card_medium" id="medium_${this.id}"
                 aria-label="${this.title}">
                 ${this.thumbnailElement}
                     data-id="${this.id}" tabindex="0"
                     src="assets/media/${this.photographerId}/${this.fileName}"
-                    alt="${this.title}">
-            </a>
+                    ${this.altAttribute}>
+            </div>
             <div class="medium-card_legend">
                 <h2 class="medium-card_title">${this.title}</h2>
                 <span class="medium-card_likes" id="likes_${this.id}">${this.likes}</span><span><i aria-label="J'aime" id="icon_${this.id}" data-id="${this.id}" class="medium-card_likes-icon fas fa-heart"></i>
@@ -35,7 +35,6 @@ export class Medium {
         article.innerHTML= MediumArticle; 
         return article;
     }
-    
 }
 
 export class Image extends Medium {
@@ -43,6 +42,7 @@ export class Image extends Medium {
         super(data);
         this.thumbnailElement = "<img class=\"medium-card_img\" ";
         this.thumbnailEndElement = "";
+        this.altAttribute = `alt=\"${data.title}\"`;
         this.slideShowElement = "<img class=\"medium-lightbox_medium-card_image\" ";
         this.slideShowEndElement = "";
         this.fileName = data.image;
@@ -61,6 +61,7 @@ export class Video extends Medium {
         super(data);
         this.thumbnailElement = "<video class=\"medium-card_video\" ";
         this.thumbnailendElement = "</video>";
+        this.altAttribute = "";
         this.slideShowElement = "<video controls class=\"medium-lightbox_medium-card_video\" ";
         this.slideShowEndElement = "</video>";
         this.fileName = data.video;

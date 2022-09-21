@@ -34,10 +34,9 @@
 //──────────────────────────────────────────────────────────────────────────────
 
 .photographers-section {
-    display:flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content:space-between;
+    display: grid;
+    grid-template-columns: 40rem 40rem 40rem; //same as article width
+    justify-content: space-between;
     margin-top: 10rem;
     &_article {
         display: flex;

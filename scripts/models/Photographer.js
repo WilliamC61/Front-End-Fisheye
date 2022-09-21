@@ -45,7 +45,8 @@ export class Photographer {
                 href="photographer.html?id=${this.id.toString()}"
                 aria-label="${this.name}">
                 <img class="photographers-section_article_portrait" 
-                    src="assets/photographersIDPict/${this.portrait}">
+                    src="assets/photographersIDPict/${this.portrait}"
+                    alt="${this.name}">
                 <h2 class="photographers-section_article_name">${this.name}</h2>
             </a>
             <h3 class="photographers-section_article_location">${this.city}, ${this.country}</h3>
@@ -73,7 +74,7 @@ export class Photographer {
             <button type="button" aria-haspopup="dialog" aria-controls="contact-modal"aria-label="ouvre la fenêtre de contact"
                 class="photographer-header_contact-button" id="contact-me-button">Contactez-moi
             </button>
-            <img class="photographer-header_portrait" src="assets/photographersIDPict/${this.portrait}">
+            <img class="photographer-header_portrait" src="assets/photographersIDPict/${this.portrait}" alt="${this.name}" >
         `;
         div.innerHTML= PhotographerHeader; 
         return div;
