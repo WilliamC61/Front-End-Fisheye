@@ -82,7 +82,7 @@ class FisheyePhotographer {
     displayPhotographerLikes() {
         this.likesDiv.innerHTML= `
         <span class="likes">${this.photographerLikes}
-            <i class="likes-icon fas fa-heart"></i>
+            <span class="likes-icon fas fa-heart"></span>
         </span>`;
     }
 
