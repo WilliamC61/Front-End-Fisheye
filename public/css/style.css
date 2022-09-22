@@ -775,6 +775,7 @@ button {
 
 .medium-lightbox_medium-card_image {
   height: 84rem;
+  width: 105rem;
   margin: 0 auto;
   border-radius: 0.5rem;
   -o-object-fit: contain;
@@ -783,7 +784,7 @@ button {
 
 .medium-lightbox_medium-card_video {
   height: 84rem;
-  width: 100rem;
+  width: 105rem;
   margin: 0 auto;
   border-radius: 0.5rem;
   -o-object-fit: contain;

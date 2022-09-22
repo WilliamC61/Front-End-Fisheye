@@ -418,7 +418,6 @@
 
 .medium-lightbox {
     display: none; // initally the light box is not displayed
-    //display: flex;
     flex-direction: row;
     justify-content: center;
     position: fixed;
@@ -445,13 +444,14 @@
     &_medium-card {
         &_image {
             height: 84rem;
+            width: 105rem;
             margin: 0 auto;
             border-radius: 0.5rem;
             object-fit: contain;
         }
         &_video {
            height: 84rem;
-           width: 100rem;
+           width: 105rem;
            margin: 0 auto;
            border-radius: 0.5rem;
            object-fit: contain;
